@@ -1,0 +1,146 @@
+// 清除默认样式, 设置页面切换动画
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+    margin: 0;
+    padding: 0;
+}
+*{box-sizing: border-box;}
+html, body {
+    height: 100%;
+    background-color: #fff;
+}
+
+body {
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    font-size:12px;
+    color:rgba(102, 102, 102, 1);
+}
+h1, h2, h3, h4, h5, h6{font-weight:normal;}
+ul,ol {
+    list-style: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: #232323;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    content: ".";
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+    overflow:hidden;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.tl {
+    text-align: left;
+}
+
+.tc {
+    text-align: center
+}
+
+.tr {
+    text-align: right;
+}
+
+.ellipse {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.inline{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.page-enter-active {
+    transition: opacity .3s;
+}
+
+.page-leave-active {
+    transition: opacity .1s;
+}
+
+.page-enter,
+.page-leave-active {
+    opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.van-button--warning{
+    color: #333333 !important;
+    background:linear-gradient(90deg,rgba(255,242,216,1) 0%,rgba(255,225,176,1) 100%);
+    border: 0 !important;
+}
+.default_btn{
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    height:88px!important;
+    background:#3DA1FF!important;
+    box-shadow:0px 5px 10px 0px rgba(119,192,255,0.5);
+    border-radius:50px!important;
+    font-size:34px!important;
+    color:rgba(255,255,255,1)!important;
+    border:none!important;
+}
+.default_btn_bottom {
+    position: absolute !important;
+    bottom: 32px;
+    width: calc(100% - 60px);
+    margin: 0 30px;
+    height:88px!important;
+    line-height: 88px!important;
+    background:#3DA1FF!important;
+    box-shadow:0px 5px 10px 0px rgba(119,192,255,0.5);
+    border-radius:50px!important;
+    font-size:34px!important;
+    color:rgba(255,255,255,1)!important;
+    border:none!important;
+}
+
+.gray-bg{
+    min-height: 100vh;
+    background: #f5f5f5;
+}

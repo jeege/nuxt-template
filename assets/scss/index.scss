@@ -1,0 +1,47 @@
+// 基本样式
+
+// 国民主色调
+$mainColor: #3DA1FF;
+
+// 国民橘黄
+$orangeColor: #ff5200;
+
+$btnMainColor: linear-gradient(90deg,rgba(187,230,255,1) 0%,rgba(61,161,255,1) 100%);
+
+$btnOrangeColor: linear-gradient(90deg,rgba(255,138,0,1) 0%,rgba(255,82,0,1) 100%);
+
+@mixin pageGray {
+    min-height: 100vh;
+    background: rgba(245, 245, 245, 1);
+}
+
+@mixin listLine {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    width: calc(100% - 24px);
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+@mixin gmBtn {
+    color: #ffffff;
+    background: $mainColor;
+    border: 0;
+}
+
+@mixin flex($d:column, $a: center, $v: center) {
+    display: flex;
+    align-items: $a;
+    justify-content: $v;
+    flex-direction: $d;
+}
+
+@mixin stretching($type:absolute) {
+    margin: auto;
+    position: $type;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
