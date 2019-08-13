@@ -2,7 +2,8 @@ import https from '../assets/js/axios'
 export const state = () => ({
   token: '',
   accountNo: '',
-  qiniutoken: ''
+  qiniutoken: '',
+  tabBarState: -1
 })
 
 export const getters = {

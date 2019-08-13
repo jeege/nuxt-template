@@ -57,9 +57,18 @@ export default {
       'info'
     ])
   },
-  asyncData() {
+  asyncData({route}) {
+    if(route.query.code == 301){
+      return {
+        err: '请重新登陆'
+      }
+    }
   },
-  mounted() { },
+  mounted() {
+    if(this.err){
+      this.$gmt.warn(this.err)
+    }
+  },
   methods: {
     ...mapMutations('user', [
       'setData'

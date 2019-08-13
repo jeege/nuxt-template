@@ -1,16 +1,25 @@
 <template>
   <div>
     <nuxt />
+    <TabBar v-if="tabBarState != -1"></TabBar>
   </div>
 </template>
 
 <script>
+import {
+  mapState
+} from 'vuex'
+import TabBar from '../components/Public/TabBar'
 export default {
   head() {
     return {
       title: this.$route.meta.title
     }
-  }
+  },
+  computed: {
+    ...mapState(['tabBarState'])
+  },
+  components: { TabBar },
 }
 </script>
 

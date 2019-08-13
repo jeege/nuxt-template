@@ -29,6 +29,7 @@ module.exports = {
     'no-useless-return': 'off',
     'import/no-mutable-exports': 'off',
     'no-useless-escape': 'off',
-    'import/named': 'off'
+    'import/named': 'off',
+    'new-cap': 'off'
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import gmEvent from './event'
 import http from './http'
 import util from './utils'
 import env from './env'
@@ -15,7 +16,7 @@ service.interceptors.response.use(
     return response
   },
   error => {
-    console.log(error) // for debug
+    //console.log(error) // for debug
     return Promise.reject(error)
   }
 )
@@ -43,7 +44,7 @@ class Axios {
 
     if (process.server) {
       accountNo = options.rootState.accountNo || ''
-      token = options.rootState.token || 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJleHBUaW1lIjoyNTkyMDAwMDAwLCJwbGF0VHlwZSI6IjIiLCJ1c2VyTmFtZSI6InN1cGVyYWRtaW4iLCJleHAiOjE1NjcxNDM3MzksInVzZXJJZCI6IjEifQ.ZStmoKFueNC_CI3lDu5QTGmfA0rr4cI8BnhQwD9eoJ8n5EFkWjzv0CXGI87BAxSIqu2AXLd8sL_8o_LZNI5TDg'
+      token = options.rootState.token
     }
 
     this.config = Object.assign(this.config, configs)
@@ -53,7 +54,7 @@ class Axios {
     if (isClient) {
       //客户端请求
       host = 'api'
-      accountNo = configs.accountNo || util.getCookie('accountNo')
+      accountNo = configs.accountNo || util.getCookie('accountNo') || ''
       token = util.getCookie('token')
       logPath = '/log'
       this.startTost()
@@ -115,6 +116,7 @@ class Axios {
             if (isClient) {
               this.updateToken()
             } else {
+              gmEvent.emmit('401')
               resolve(err.response.status)
             }
           } else {
@@ -159,9 +161,7 @@ class Axios {
   }
   // 更新已过期token
   updateToken() {
-    Toast.warn('请重新登录').then(() => {
-      window.location.href = "/"
-    })
+    window.location.href = "/index?code=301"
   }
 }
 
