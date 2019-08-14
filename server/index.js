@@ -11,6 +11,14 @@ const app = express()
 
 const jsonParser = bodyParser.json();
 
+try {
+  fs.statSync('./logs');
+} catch (error) {
+  fs.mkdir('logs', { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+}
+
 let logPath = 'logs/process-log.log'
 let logFile = fs.createWriteStream(logPath, { flags: 'a' })
 

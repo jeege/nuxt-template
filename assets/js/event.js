@@ -3,19 +3,14 @@ class Event {
     this.ev = {}
   }
   on(type, fn) {
-    if (this.ev[type]) {
-      this.ev[type].push(fn)
-    } else {
-      this.ev[type] = [fn]
+    if (!this.ev[type]) {
+      this.ev[type] = fn
     }
   }
   emmit(type) {
     if (this.ev[type]) {
-      this.ev[type].map(i => {
-        i()
-      })
-    } else {
-      console.log('没有注册的事件')
+      this.ev[type]()
+      delete this.ev[type]
     }
   }
 }
