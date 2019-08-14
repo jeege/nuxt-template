@@ -55,10 +55,6 @@ module.exports = {
       src: "~plugins/weixin-js-sdk",
       ssr: false
     },
-    {
-      src: "~plugins/share",
-      ssr: false
-    },
     '~/plugins/toast',
     '~/plugins/catchErr',
   ],
