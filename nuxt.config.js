@@ -66,16 +66,26 @@ module.exports = {
     '@nuxtjs/eslint-module'
   ],
   // 扩展路由 
-  router,
+  router: {
+    middleware:'headers',
+    scrollBehavior: ()  => {
+      return { x: 0, y: 0 }
+    },
+  },
 
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/router',
     '@nuxtjs/axios'
   ],
-
+  routerModule: {
+    /* module options */
+    keepDefaultRouter: true,
+    path: './router'
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

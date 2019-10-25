@@ -1,15 +1,35 @@
-import Business from './business'
+import Vue from 'vue'
+import Router from 'vue-router'
 
-const router = {
-  middleware:'headers',
-  scrollBehavior: ()  => {
-    return { x: 0, y: 0 }
-  },
-  extendRoutes (routes, resolve) {
-      routes.push(
-      ...Business(resolve)
-      )
-  }
+Vue.use(Router)
+
+const generateRoutes = (routeList) => {
+  return routeList.map(({ name, path, dir, title }) => {
+    return {
+      name,
+      path,
+      component: `../views/${dir}.vue`,
+      meta: {
+        title
+      }
+    }
+  })
 }
 
-export default router
+const Public = [
+  {
+    dir: 'Public/WxAuth/index',
+    path: '/wx-auth',
+    name: 'WxAuth',
+    title: '微信授权'
+  }
+]
+
+export function createRouter() {
+  return new Router({
+    mode: 'history',
+    routes: generateRoutes([
+      ...Public,
+    ])
+  })
+}
