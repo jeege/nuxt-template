@@ -8,7 +8,7 @@ const generateRoutes = (routeList) => {
     return {
       name,
       path,
-      component: `../views/${dir}.vue`,
+      component:  () => import(`../views/${dir}.vue`).then(m => m.default || m),
       meta: {
         title
       }

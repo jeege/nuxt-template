@@ -1,6 +1,7 @@
+import path from 'path'
 import pkg from './package'
-import router from './router'
 import env from './assets/js/env'
+
 console.log('环境', process.env.NODE_ENV)
 
 module.exports = {
@@ -115,7 +116,15 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { },
+    extend(config, ctx) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'js': path.resolve(__dirname,'assets/js'),
+        'imgs': path.resolve(__dirname,'assets/imgs'),
+        'mixin': path.resolve(__dirname,'assets/mixin'),
+        'scss': path.resolve(__dirname,'assets/scss')
+      }
+    },
     vendor: ['axios'],
     postcss: {
       plugins: {

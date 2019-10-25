@@ -1,7 +1,7 @@
 import axios from 'axios'
 import gmEvent from './event'
 import http from './http'
-import util from './utils'
+import {setCookie,getCookie} from './utils'
 import env from './env'
 import Toast from '~/plugins/toast'
 
@@ -12,7 +12,7 @@ const service = axios.create({
 // 2: 在回调期间, 植入脚本
 service.interceptors.response.use(
   response => {
-    if (response.headers.token) util.setCookie('token', response.headers.token)
+    if (response.headers.token) setCookie('token', response.headers.token)
     return response
   },
   error => {
@@ -54,8 +54,8 @@ class Axios {
     if (isClient) {
       //客户端请求
       host = 'api'
-      accountNo = configs.accountNo || util.getCookie('accountNo') || ''
-      token = util.getCookie('token')
+      accountNo = configs.accountNo || getCookie('accountNo') || ''
+      token = getCookie('token')
       logPath = '/log'
       this.startTost()
     } else {

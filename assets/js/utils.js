@@ -21,7 +21,7 @@ import {
   uploadQN
 } from './requestForYou'
 
-export default {
+export {
   getTime,
   getPhone,
   getCookie,
