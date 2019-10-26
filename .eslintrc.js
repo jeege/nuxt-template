@@ -17,6 +17,10 @@ module.exports = {
   plugins: [
     'prettier'
   ],
+  // 定义全局变量
+  globals: {
+    wx: true
+  },
   // add your custom rules here
   rules: {
     'nuxt/no-cjs-in-config': 'off',

@@ -60,18 +60,15 @@ module.exports = {
     '~/plugins/catchErr',
   ],
   /*
-   ** Nuxt.js dev-modules
+   ** Nuxt.js build-modules
    */
-  devModules: [
+  buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
   // 扩展路由 
   router: {
     middleware:'headers',
-    scrollBehavior: ()  => {
-      return { x: 0, y: 0 }
-    },
   },
 
   /*
