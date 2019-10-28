@@ -1,91 +1,42 @@
-// 获取token
-// 参数为需要获取的键名
-function getCookie(key, doc = document) {
-  try {
-    let arr = doc.cookie.split(';')
-    for (let i = 0; i < arr.length; i++) {
-      let tempArr = arr[i].split('=')
-      if (tempArr[0].trim() == key) {
-        return decodeURIComponent(tempArr[1].trim())
-      }
-    }
-    return ''
-  } catch (error) {
-    return ''
-  }
-}
-// 设置cookie
-function setCookie(name, value, seconds) {
-  seconds = seconds || 0;   //seconds有值就直接赋值，没有为0
-  let expires = "";
-  if (seconds != 0) {      //设置cookie生存时间
-    let date = new Date();
-    date.setTime(date.getTime() + (seconds * 1000));
-    expires = "; expires=" + date.toGMTString();
-  }
-  document.cookie = name + "=" + escape(value) + expires + "; path=/";   //转码并赋值
+const getCookie = (key, doc = document) => {
+  return decodeURIComponent(doc.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
 
-// 获取当前是安卓还是苹果
-function getPhone() {
-  let u = navigator.userAgent
-  let isAndroid = u.includes('Android') || u.includes('Adr')
-  let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-  if (isAndroid) {
-    return 'android'
-  } else if (isiOS) {
-    return 'ios'
-  } else {
-    return '啥也不是'
+const setCookie = (key, value, endTime, sPath, sDomain, bSecure) => {
+  if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) {
+    return false;
   }
-}
-
-//时间格式化
-const timeFormat = t => {
-  return t < 10 ? "0" + t : t;
-}
-//倒计时
-const getTime = msd => {
-  let time = parseFloat(msd);
-  if (time != null && time != "") {
-    if (time > 60 && time < 60 * 60) {
-      time =
-        "00:" +
-        timeFormat(parseInt(time / 60.0)) +
-        ":" +
-        timeFormat(parseInt(time % 60)) +
-        "";
-    } else if (time >= 60 * 60 && time < 60 * 60 * 24) {
-      let h = parseInt(time / (60 * 60));
-      let f = time - h * 60 * 60;
-      time =
-        timeFormat(h) +
-        ":" +
-        timeFormat(parseInt(f / 60.0)) +
-        ":" +
-        timeFormat(parseInt(f % 60)) +
-        "";
-    } else if (time > 60 * 60 * 24) {
-      let d = parseInt(time / (60 * 60 * 24));
-      let h = parseInt((time - d * 60 * 60 * 24) / (60 * 60));
-      let f = time - d * 60 * 60 * 24 - h * 60 * 60;
-      time =
-        d +
-        "天" +
-        timeFormat(h) +
-        ":" +
-        timeFormat(parseInt(f / 60.0)) +
-        ":" +
-        timeFormat(parseInt(f % 60)) +
-        "";
-    } else {
-      time = "00:00:" + timeFormat(parseInt(time));
+  let sExpires = "";
+  if (endTime) {
+    switch (endTime.constructor) {
+      case Number:
+        sExpires = endTime === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + endTime;
+        break;
+      case String:
+        sExpires = "; expires=" + endTime;
+        break;
+      case Date:
+        sExpires = "; expires=" + endTime.toUTCString();
+        break;
     }
   }
-  return time;
+  document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+  return true;
 }
 
+const removeCookie = (sKey, sPath, sDomain) => {
+  if (!sKey || !this.hasItem(sKey)) { return false; }
+  document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+  return true;
+}
+const hasCookie = (sKey) => {
+  return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+}
 
+const getCookieKeys = () => {
+  const aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+  for (let nIdx = 0; nIdx < aKeys.length; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+  return aKeys;
+}
 
-
-export { getCookie, setCookie, getPhone, getTime }
+export { getCookie, setCookie, removeCookie, hasCookie, getCookieKeys }

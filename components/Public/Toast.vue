@@ -3,11 +3,12 @@
 * @Date: 2019-06-01
 * @Name: toast组件  
  * @Last Modified by: linzhijie
- * @Last Modified time: 2019-08-08 10:40:38
+ * @Last Modified time: 2019-10-28 15:23:00
 */
 <template>
   <transition>
-    <div class="wrap" :icon="icon">
+    <div class="wrap"
+         :icon="icon">
       <div class="content">
         <img :src="require(`~/assets/imgs/toast${icon}.png`)"
              :class="{'rotate': rotate }"
@@ -25,32 +26,31 @@ export default {
   data() {
     return {
       icon: 1, // 1:加载  2:对号 3:感叹号 4:星星 5:时钟  6:×
-      tName:'',
+      tName: '',
     }
   },
   methods: {
-    show(message,icon = 1 ,time = 1500){
+    show(message, icon = 1, time = 1500) {
       this.icon = icon
       this.tName = message
-      setTimeout(()=>{
+      setTimeout(() => {
         this.$el.remove()
-      },time)
+      }, time)
     }
   },
   computed: {
-    rotate(){
+    rotate() {
       const rotateList = [1]
-      if(rotateList.includes(this.icon+'')||rotateList.includes(+this.icon)){
+      if (rotateList.includes(this.icon + '') || rotateList.includes(+this.icon)) {
         return true
       }
       return false
     }
   },
-  mounted(){}
+  mounted() { }
 }
 </script>
 <style lang='scss' scoped>
-@import '~/assets/scss/index.scss';
 .wrap {
   @include flex;
   @include stretching(fixed);

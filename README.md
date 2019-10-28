@@ -1,6 +1,6 @@
-# mio-goddess
+# nuxt-template
 
-> 百万女神
+> nuxt模板
 
 ## Build Setup
 

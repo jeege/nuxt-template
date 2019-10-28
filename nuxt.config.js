@@ -77,6 +77,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/router',
+    '@nuxtjs/style-resources',
     '@nuxtjs/axios'
   ],
   routerModule: {
@@ -84,6 +85,10 @@ module.exports = {
     keepDefaultRouter: true,
     path: './router'
   },
+
+  styleResources: {
+    scss: ['./assets/scss/index.scss', './assets/scss/mian.scss'],
+   },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

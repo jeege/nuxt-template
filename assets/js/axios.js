@@ -1,22 +1,26 @@
 import axios from 'axios'
-import gmEvent from './event'
 import http from './http'
-import {setCookie,getCookie} from './utils'
+import { setCookie, getCookie } from './utils'
 import env from './env'
 import Toast from '~/plugins/toast'
 
-// 1: 设定超时时间
+/**
+* @description 设置axios请求超时时间
+*/
 const service = axios.create({
   timeout: 15000
 })
-// 2: 在回调期间, 植入脚本
+
+/**
+* @description 响应拦截器，获取token，保存至cookie
+*/
 service.interceptors.response.use(
   response => {
     if (response.headers.token) setCookie('token', response.headers.token)
     return response
   },
   error => {
-    console.log(error.Error) // for debug
+    console.error(error.Error) // for debug
     return Promise.reject(error)
   }
 )
@@ -116,7 +120,6 @@ class Axios {
             if (isClient) {
               this.updateToken()
             } else {
-              gmEvent.emmit('401')
               resolve(err.response.status)
             }
           } else {
