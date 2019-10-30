@@ -27,6 +27,7 @@ export {
 export { isEq } from './isEq'
 //倒计时
 export { getTime } from './time'
+export { $event } from './event'
 
 export {
   getJsCode,

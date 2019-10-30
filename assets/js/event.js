@@ -47,4 +47,4 @@ class EventEmiter {
   }
 }
 
-export const Event = EventEmiter.getInstance()
+export const $event = EventEmiter.getInstance()

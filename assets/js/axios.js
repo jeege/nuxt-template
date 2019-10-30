@@ -20,143 +20,84 @@ service.interceptors.response.use(
     return response
   },
   error => {
-    console.error(error.Error) // for debug
     return Promise.reject(error)
   }
 )
-// 1: 如果不用cookie中的accountNo,要单独写在config里面
-// 2: type请求方式
-// 3: 是否需要加载中的tost
-// 4: 是否需要结束的tost
-// 5: 是否完全抹杀accountNo参数
+
 class Axios {
   constructor(props) {
-    this.http = props
-    this.config = {}
+    this.https = props
+    this.headers = {}
   }
 
-  request(model, url, options = {}, configs = {}) {
-    // 3: 重置默认配置项, 以确保每次都不重复
-    let accountNo, token, host, logPath
-    this.config = {
-      type: 'post',
-      showEnd: true,
-      showStart: true,
-      useAccountNo: true,
-      isClient: process.client  //是否是客户端
-    }
+  /**
+  * @description 请求封装
+  * @param {String} url 请求的接口地址  
+  * @param {String} method 请求方法默认post
+  * @param {String} gateWay 请求转发前缀
+  * @param {Object} data 请求的数据
+  * @param {Boolean} showLoading 是否显示请求loading
+  * @param {Boolean} showError 是否弹出请求错误信息
+  * @param {Boolean} handle 是否返回处理后的数据
+  * @param {Object} cookieFrom 获取cookie的对象，默认document
+  */
+  request({ url, method = 'post', gateWay = 'api', data, showLoading = true, showError = true, handle = true, cookieFrom = document }) {
+    const isClient = process.client
+    // 请求地址
+    const requestUrl = (() => {
+      if (gateWay === 'local') return env.baseUrl
+      if (isClient) return gateWay
+      return env[`${gateWay}Url`]
+    })() + url
 
-    if (process.server) {
-      accountNo = options.rootState.accountNo || ''
-      token = options.rootState.token
-    }
+    //设置请求头token
+    const token = getCookie('token', cookieFrom)
+    token && this.setToken(token)
 
-    this.config = Object.assign(this.config, configs)
-    let { type, headers, isClient } = this.config
-    delete options.rootState
+    //开启菊花图
+    isClient && showLoading && Toast.loading('Loading...')
 
-    if (isClient) {
-      //客户端请求
-      host = 'api'
-      accountNo = configs.accountNo || getCookie('accountNo') || ''
-      token = getCookie('token')
-      logPath = '/log'
-      this.startTost()
-    } else {
-      //服务端请求
-      host = env.EnvType
-      logPath = env.baseUrl + '/log'
-    }
 
-    this.getToken(token)
-
-    // 5: 如果用户在配置项内传入了相关配置, 则会顶掉Cookie里面获取的accountNo;
-    if (typeof options == 'object') {
-      if (!options.accountNo && accountNo) options.accountNo = accountNo
-      if (!this.config.useAccountNo) delete options.accountNo
-    }
-    let start = Date.now()
-    // 6: 拿到token, 弹出加载提示框
     return new Promise((resolve, reject) => {
-      // 7: 拼接请求配置, 生成请求地址, 参数, 与方式.
-      service[type](host + this.http[model][url], options, {
-        headers: headers || {}
+      service({
+        url: requestUrl,
+        method,
+        data,
+        headers: {
+          ...this.headers
+        }
+      }).then(res => {
+        // 关闭菊花图
+        isClient && showLoading && Toast.close_loading()
+        if (!handle) {
+          // 不处理数据
+          resolve(res.data)
+        } else if (res.data.code === '1000') {
+          // code码1000返回具体数据
+          resolve(res.data.data)
+        } else {
+          // 弹出错误提示
+          isClient && showError && Toast.error(res.data.message)
+          reject(res.data.message)
+        }
+      }).catch(err => {
+        // 关闭菊花图
+        isClient && showLoading && Toast.close_loading()
+        if (err.response) {
+          // 弹出错误提示
+          isClient && showError && Toast.error(err.response.data.message)
+          reject(err.response.data)
+        } else {
+          reject(err.message)
+        }
       })
-        .then(data => {
-
-          //发送请求成功日志
-          this.sendLog(logPath, {
-            type: '成功请求',
-            url: host + this.http[model][url],
-            params: options,
-            method: this.config.type,
-            code: data.data.code,
-            time: (Date.now() - start) + 'ms',
-          })
-
-          // 8: token过期则调用更新token方法
-          if (data.data.code == 500) {
-            reject(data.data)
-          } else {
-            resolve(data.data)
-          }
-          // 9: 擦屁股
-          isClient && Toast.close_loading()
-        })
-        .catch(err => {
-          isClient && Toast.close_loading()
-
-          //发送请求错误日志
-          this.sendLog(logPath, {
-            type: '失败请求',
-            url: host + this.http[model][url],
-            params: options,
-            method: this.config.type,
-            code: err.response && err.response.status || 500,
-            error: err.message,
-            time: (Date.now() - start) + 'ms',
-          })
-          if (err.response && err.response.status == 401) {
-            if (isClient) {
-              this.updateToken()
-            } else {
-              resolve(err.response.status)
-            }
-          } else {
-            isClient && this.endTost('出错了')
-            resolve({ message: '出错了' })
-          }
-        })
     })
   }
-  startTost(msg = 'Loading...') {
-    try {
-      if (this.config.showStart) {
-        Toast.loading(msg)
-      }
-    } catch (error) { }
+
+  setToken(token) {
+    this.headers.token = token
   }
-  // 有msg就弹出msg
-  endTost(msg = '错误') {
-    try {
-      if (this.config.showEnd) {
-        Toast.close_loading()
-        Toast.error(msg)
-      }
-    } catch (error) { }
-  }
-  getToken(token) {
-    service.interceptors.request.use(
-      config => {
-        if (token)
-          config.headers.token = token
-        return config
-      },
-      error => {
-        return Promise.reject(error)
-      }
-    )
-  }
+
   sendLog(logPath, params) {
     axios.post(logPath, params).catch(err => {
       console.log(err)
@@ -168,7 +109,7 @@ class Axios {
   }
 }
 
-let https = new Axios(http)
-https = https.request.bind(https)
+const https = new Axios(http)
+const request = https.request.bind(https)
 
-export default https
+export default request 

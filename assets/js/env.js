@@ -1,19 +1,34 @@
-let EnvType = `${process.env.NODE_ENV}.nhf.cn/wjj-web-manager`
-let appid = 'wx9bdc98ec3cbb4a94'
-let baseUrl = process.env.baseUrl
+import pkg from '../../package'
+let appid = 'wxa7c464f4beddd1db'
 
-if (process.env.NODE_ENV == 'production') {
-  appid = 'wx684b247cae78d00f'
-  EnvType = '-prod.nahefa.com.cn/wjj-web-manager'
+const EnvType = {
+  dev: '.dev.nhf.cn',
+  test: '.test.nhf.cn',
+  uat: '.uat.nhf.cn',
+  production: '-prod.nhf.cn',
+}[process.env.NODE_ENV]
+
+const baseUrl = process.env.MODE === 'local' ?
+  `http://127.0.0.1:${pkg.config.nuxt.port}` : {
+    dev: 'https://goddess-dev.nhf.cn',
+    test: 'https://goddess-test.nhf.cn',
+    uat: 'https://goddess-uat.nhf.cn',
+    production: 'https://goddess-careers.guominhealth.com',
+  }[process.env.NODE_ENV]
+
+
+if (process.env.NODE_ENV === 'production') {
+  appid = ''
 }
-
 const env = {
   appid,
-  EnvType: 'https://api' + EnvType,
+  baseUrl,
+  apiUrl: `https://api${EnvType}/wjj-web-manager`,
+  createUrl: `https://api${EnvType}/wjj-web-manager-create`,
+  wsUrl: `https://api${EnvType}/wjj-web-manager-ws`,
   h5PublicUrl: 'https://public' + EnvType,
   // 概念性的, 解释性的, 专业的名词, 统一在gm下面管理, 方便调整
   gm: {},
-  baseUrl
 }
 
 export default env

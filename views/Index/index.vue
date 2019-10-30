@@ -1,21 +1,23 @@
 <template>
   <div>
-    首页
   </div>
 </template>
 
 <script>
 export default {
-  name:'',
-  data(){
-   return {
-   }
+  name: '',
+  data() {
+    return {
+    }
   },
-  mounted(){
+  computed: {
+  },
+  asyncData({ store }) {
+  },
+  mounted() {
   }
 }
 </script>
 
 <style lang="scss" scoped >
-
 </style>

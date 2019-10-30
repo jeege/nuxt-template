@@ -68,7 +68,7 @@ module.exports = {
   ],
   // 扩展路由 
   router: {
-    middleware:'headers',
+    middleware: ['auth', 'headers'],
   },
 
   /*
@@ -88,28 +88,39 @@ module.exports = {
 
   styleResources: {
     scss: ['./assets/scss/index.scss', './assets/scss/mian.scss'],
-   },
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: '/api',
     proxy: true
   },
 
   proxy: {
     '/api': {
-      target: env.EnvType,
+      target: env.apiUrl,
       pathRewrite: {
         '^/api': '/'
+      }
+    },
+    '/create': {
+      target: env.createUrl,
+      pathRewrite: {
+        '^/create': '/'
+      }
+    },
+    '/ws': {
+      target: env.wsUrl,
+      pathRewrite: {
+        '^/ws': '/'
       }
     },
   },
 
   env: {
     NODE_ENV: process.env.NODE_ENV,
-    baseUrl: 'http://127.0.0.1:' + pkg.config.nuxt.port
+    MODE: process.env.MODE
   },
   /*
    ** Build configuration
@@ -121,10 +132,11 @@ module.exports = {
     extend(config, ctx) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        'js': path.resolve(__dirname,'assets/js'),
-        'imgs': path.resolve(__dirname,'assets/imgs'),
-        'mixin': path.resolve(__dirname,'assets/mixin'),
-        'scss': path.resolve(__dirname,'assets/scss')
+        'js': path.resolve(__dirname, 'assets/js'),
+        'api': path.resolve(__dirname, 'assets/api/index.js'),
+        'imgs': path.resolve(__dirname, 'assets/imgs'),
+        'mixin': path.resolve(__dirname, 'assets/mixin'),
+        'scss': path.resolve(__dirname, 'assets/scss')
       }
     },
     vendor: ['axios'],
