@@ -2,9 +2,9 @@ import pkg from '../../package'
 let appid = 'wxa7c464f4beddd1db'
 
 const EnvType = {
-  dev: '.dev.nhf.cn',
-  test: '.test.nhf.cn',
-  uat: '.uat.nhf.cn',
+  dev: '-dev.nhf.cn',
+  test: '-test.nhf.cn',
+  uat: '-uat.nhf.cn',
   production: '-prod.nhf.cn',
 }[process.env.NODE_ENV]
 

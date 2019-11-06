@@ -22,7 +22,6 @@ export default {
       } else {
         setCookie('openid', openid)
       }
-    } else {
       redirect(decodeURIComponent(from))
     }
 

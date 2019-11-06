@@ -1,5 +1,4 @@
 import axios from 'axios'
-import http from './http'
 import { setCookie, getCookie } from './utils'
 import env from './env'
 import Toast from '~/plugins/toast'
@@ -25,8 +24,7 @@ service.interceptors.response.use(
 )
 
 class Axios {
-  constructor(props) {
-    this.https = props
+  constructor() {
     this.headers = {}
   }
 
@@ -109,7 +107,7 @@ class Axios {
   }
 }
 
-const https = new Axios(http)
+const https = new Axios()
 const request = https.request.bind(https)
 
 export default request 

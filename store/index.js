@@ -19,7 +19,7 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ commit }, { req }) {
-    const openid = getCookie('openid', req.headers) || undefined
+    const openid = getCookie('openid', req.headers) || ''
     commit('setData', {
       openid,
     })
