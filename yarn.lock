@@ -831,14 +831,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.5.5":
-  version "7.5.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
-  integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.6.3":
+"@babel/runtime@7.x", "@babel/runtime@^7.6.3":
   version "7.7.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.6.tgz#d18c511121aff1b4f2cd1d452f1bac9601dd830f"
   integrity sha512-BWAJxpNVa0QlE5gZdWjSxXtemZyZ9RmrmVozxt3NUXeZhVIJ5ANyqmMc0JDrivBZyxUuQvFxlvH4OWWOogGfUw==
@@ -1456,10 +1449,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@vant/icons@1.1.9":
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.1.9.tgz#37eafdaff5fcfbb594a27a1470ff3adeb2fa0301"
-  integrity sha512-nGw0EE5jWe5doIJ6aHll2ia5Z/X5jxK9y5xK/r6swhGU3/Z12nrYVkN3T+EH+sRrMB4+Q/w054e10Gq4cV4T7g==
+"@vant/icons@1.1.13":
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.1.13.tgz#ea77298f4f2b19ccc761005068a2c7436098e4d4"
+  integrity sha512-r2EoKDQ4Xh82fo5jVY/m/+LZFfRhHp+ViagySExzlJ7t6JFtmK1OqB6HdFkXXbfEzB/48BvGoPVifFoYzke6KQ==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -10728,13 +10721,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-2.1.1.tgz#96ca7ecc3f71f51c1e3364d71eb587583575e895"
-  integrity sha512-V52fPEF4psMyLZJeDTnrUZxVpXk3TJXUKYF1prYCmqruyr5BQUdBVCEyVAklDCLps9Bot9yWv1KIu0Nmd6bLFA==
+vant@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.1.8.tgz#38cb5ac8cf6a78805ece57d4b278584f7d13cd47"
+  integrity sha512-mF0ivFVfbErsEtTYqDt2URNXRZi6JpOwPI+0WFgjRP23cktrew6cScuaqy3pEYXfJqxLgMwk2ehzCHat67x0XA==
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    "@vant/icons" "1.1.9"
+    "@babel/runtime" "7.x"
+    "@vant/icons" "1.1.13"
     "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
     vue-lazyload "1.2.3"
 
