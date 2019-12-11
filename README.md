@@ -1,7 +1,3 @@
-# mio-goddess
-
-> 百万女神
-
 ## Build Setup
 
 ``` bash
