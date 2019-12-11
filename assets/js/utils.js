@@ -2,17 +2,10 @@
 import {
   getStorage,
   setStorage,
-  clearAllCookie,
   clearSingleStorage,
   clearAllStorage,
-} from './session'
-// 2: 获取cooike, 获取当前设备类型
-import {
-  getTime,
-  getPhone,
-  getCookie,
-  setCookie,
-} from './cookie'
+} from './storage'
+
 // 3: 封装代理公共请求
 import {
   getJsCode,
@@ -21,16 +14,26 @@ import {
   uploadQN
 } from './requestForYou'
 
-export default {
-  getTime,
-  getPhone,
-  getCookie,
-  setCookie,
+// 2: 获取cooike
+export {
+  getCookie, 
+  setCookie, 
+  removeCookie, 
+  hasCookie, 
+  getCookieKeys
+} from './cookie'
+
+//判断设备
+export { isEq } from './isEq'
+//倒计时
+export { getTime } from './time'
+export { $event } from './event'
+
+export {
   getJsCode,
   getStorage,
   setStorage,
   getUrlParam,
-  clearAllCookie,
   clearSingleStorage,
   clearAllStorage,
   getMemberInfoByAccountNo,

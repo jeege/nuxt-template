@@ -1,6 +1,7 @@
+import path from 'path'
 import pkg from './package'
-import router from './router'
 import env from './assets/js/env'
+
 console.log('环境', process.env.NODE_ENV)
 
 module.exports = {
@@ -59,44 +60,67 @@ module.exports = {
     '~/plugins/catchErr',
   ],
   /*
-   ** Nuxt.js dev-modules
+   ** Nuxt.js build-modules
    */
-  devModules: [
+  buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
   // 扩展路由 
-  router,
+  router: {
+    middleware: ['auth', 'headers'],
+  },
 
   /*
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/router',
+    '@nuxtjs/style-resources',
     '@nuxtjs/axios'
   ],
+  routerModule: {
+    /* module options */
+    keepDefaultRouter: true,
+    path: './router'
+  },
 
+  styleResources: {
+    scss: ['./assets/scss/index.scss', './assets/scss/mian.scss'],
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: '/api',
     proxy: true
   },
 
   proxy: {
     '/api': {
-      target: env.EnvType,
+      target: env.apiUrl,
       pathRewrite: {
         '^/api': '/'
+      }
+    },
+    '/create': {
+      target: env.createUrl,
+      pathRewrite: {
+        '^/create': '/'
+      }
+    },
+    '/ws': {
+      target: env.wsUrl,
+      pathRewrite: {
+        '^/ws': '/'
       }
     },
   },
 
   env: {
     NODE_ENV: process.env.NODE_ENV,
-    baseUrl: 'http://127.0.0.1:' + pkg.config.nuxt.port
+    MODE: process.env.MODE
   },
   /*
    ** Build configuration
@@ -105,7 +129,16 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { },
+    extend(config, ctx) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'js': path.resolve(__dirname, 'assets/js'),
+        'api': path.resolve(__dirname, 'assets/api/index.js'),
+        'imgs': path.resolve(__dirname, 'assets/imgs'),
+        'mixin': path.resolve(__dirname, 'assets/mixin'),
+        'scss': path.resolve(__dirname, 'assets/scss')
+      }
+    },
     vendor: ['axios'],
     postcss: {
       plugins: {

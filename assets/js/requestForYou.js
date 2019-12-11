@@ -1,6 +1,6 @@
 /* eslint-disable */
 import https from '~/assets/js/axios.js'
-import util from '~/assets/js/utils.js'
+import {getCookie} from '~/assets/js/utils.js'
 import env from '~/assets/js/env'
 
 const getUrlParam = function* (name) {
@@ -16,7 +16,7 @@ const getMemberInfoByAccountNo = () => {
     https(
       'user',
       'getMemberInfoByAccountNo',
-      { accountNo: util.getCookie('accountNo') },
+      { accountNo: getCookie('accountNo') },
       { showEnd: false, showStart: false }
     ).then(data => {
       if (data.code == 1000) {

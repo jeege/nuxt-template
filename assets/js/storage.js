@@ -19,19 +19,11 @@ const clearAllStorage  = function(value){
 const clearSingleStorage  = function(value){
     window.localStorage.removeItem(value);
 }
-// 5: 清除
-const clearAllCookie = function() { 
-    let keys=document.cookie.match(/[^ =;]+(?=\=)/g); 
-    if (keys) { 
-        for (let i = keys.length; i--;) 
-        document.cookie=keys[i]+'=0;expires=' + new Date( 0).toUTCString() 
-    } 
-}
+
 
 export {
     getStorage,
     setStorage,
     clearAllStorage,
     clearSingleStorage,
-    clearAllCookie
 }

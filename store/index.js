@@ -1,9 +1,8 @@
-import https from '../assets/js/axios'
+import { getCookie } from 'js/utils'
 export const state = () => ({
+  openid: '',
+  unionid: '',
   token: '',
-  accountNo: '',
-  qiniutoken: '',
-  tabBarState: -1
 })
 
 export const getters = {
@@ -11,22 +10,18 @@ export const getters = {
 }
 
 export const mutations = {
-  setData(state, obj) {
-    Object.entries(obj).map(([key, value]) => {
+  setData(state, data) {
+    Object.entries(data).map(([key, value]) => {
       state[key] = value
     })
   }
 }
 
 export const actions = {
-  //获取七牛token
-  async getQiNiuToken({ commit, rootState }) {
-    const data = await https('upload', 'burstImageLoad', { rootState }, {
-      showEnd: false,
-      showStart: false,
+  nuxtServerInit({ commit }, { req }) {
+    const openid = getCookie('openid', req.headers) || ''
+    commit('setData', {
+      openid,
     })
-    if (data.code == 1000) {
-      commit('setData', { qiniutoken: data.data })
-    }
-  },
+  }
 }
