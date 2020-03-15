@@ -1304,10 +1304,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@vant/icons@1.1.15":
-  version "1.1.15"
-  resolved "http://119.3.59.10:8081/repository/npm-all/@vant/icons/-/icons-1.1.15.tgz#53c51ace21e9992bfeeb2e1ad9094fbf6506d116"
-  integrity sha1-U8UaziHpmSv+6y4a2QlPv2UG0RY=
+"@vant/icons@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.2.1.tgz#309fecb97a4989866f045ce676b545c454701c8f"
+  integrity sha512-5ivsKQR4ySbdBW5UPoQDVqO6rdc1um3rvq/0VL+ZSA7Y3MdBQ3E4/NL0hoAY5/sZZeYfIDKEP21gpjUzdeEDQQ==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -1604,9 +1604,9 @@ acorn-walk@^6.0.1, acorn-walk@^6.1.1:
   integrity sha1-Ejy487hMIXHx9/slJhWxx4prGow=
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "http://119.3.59.10:8081/repository/npm-all/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha1-Z6ojG/iBKXS4UjWpZ3Hra9B+onk=
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 acorn@^6.0.1, acorn@^6.0.2, acorn@^6.0.7, acorn@^6.2.1:
   version "6.3.0"
@@ -10413,13 +10413,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.1.1:
-  version "2.2.10"
-  resolved "http://119.3.59.10:8081/repository/npm-all/vant/-/vant-2.2.10.tgz#ac0aa43e7f27e56a7209774f87b87ad936083b51"
-  integrity sha1-rAqkPn8n5WpyCXdPh7h62TYIO1E=
+vant@^2.1.8:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.5.5.tgz#4484e4224127a88a47147b35ab52a91bacc2e939"
+  integrity sha512-w7APepClXcEMFJvvYsJkNDWCCb+a5SR9eAMMIYM/1VCwn7r7AxoAtJSCaZsmw3vhSxnMSnM/+Ftz7t3o0eoK4Q==
   dependencies:
     "@babel/runtime" "7.x"
-    "@vant/icons" "1.1.15"
+    "@vant/icons" "1.2.1"
     "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
     vue-lazyload "1.2.3"
 
