@@ -1304,10 +1304,10 @@
     lodash.unescape "4.0.1"
     semver "5.5.0"
 
-"@vant/icons@1.1.15":
-  version "1.1.15"
-  resolved "http://119.3.59.10:8081/repository/npm-all/@vant/icons/-/icons-1.1.15.tgz#53c51ace21e9992bfeeb2e1ad9094fbf6506d116"
-  integrity sha1-U8UaziHpmSv+6y4a2QlPv2UG0RY=
+"@vant/icons@1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.2.3.tgz#c46b7ddd32363f790944c3af974b73bda80df7a1"
+  integrity sha512-LMu1JGGgZqLYXVFRcuNRDCOWE7AX0vt/gFBkd9xMI7H9uMdNx2oO3YujgNVvVrrF8iufHwfwUv41HiwYMvU3zQ==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -6393,9 +6393,9 @@ lodash.zip@^4.2.0:
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
 lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
-  version "4.17.15"
-  resolved "http://119.3.59.10:8081/repository/npm-all/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log4js@^4.5.1:
   version "4.5.1"
@@ -10413,13 +10413,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.1.1:
-  version "2.2.10"
-  resolved "http://119.3.59.10:8081/repository/npm-all/vant/-/vant-2.2.10.tgz#ac0aa43e7f27e56a7209774f87b87ad936083b51"
-  integrity sha1-rAqkPn8n5WpyCXdPh7h62TYIO1E=
+vant@^2.1.8:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-2.9.2.tgz#df7b9d6d3d8274c407659ec88feb5fa1a3a3a3f0"
+  integrity sha512-mPI0WGXFgDiF+gqoePz3cYt2ra2dIglIECU29vunUKsQxhEVkKLBEviAV3J+q+1A6NizLvp4xrdWdq67/maTiA==
   dependencies:
     "@babel/runtime" "7.x"
-    "@vant/icons" "1.1.15"
+    "@vant/icons" "1.2.3"
     "@vue/babel-helper-vue-jsx-merge-props" "^1.0.0"
     vue-lazyload "1.2.3"
 
